@@ -1,0 +1,5 @@
+{
+  "name": "Customer Master Creation Portal",
+  "description": "Automated workflow for Customer Master Creation with GSTN validation and NetSuite integration.",
+  "requestFramePermissions": []
+}
