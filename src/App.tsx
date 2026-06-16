@@ -16,6 +16,8 @@ import NewVendor from "./pages/NewVendor";
 import Rejected from "./pages/Rejected";
 // import { loginUser } from "./api";
 import Login from "./pages/Login";
+import LoginTest from "./pages/LoginTest";
+import HomeScreen from "./pages/HomeScreen";
 
 export type Page =
   | "dashboard"
@@ -52,6 +54,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>(getPageFromHash);
   const [currentUserRole, setCurrentUserRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showHomeScreen, setShowHomeScreen] = useState(false);
   // const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
   // Modal state for role-switch login prompt
@@ -115,8 +118,18 @@ export default function App() {
       const parsedUser = JSON.parse(user);
       setCurrentUserRole(parsedUser.role);
       setIsLoggedIn(true);
+      // Don't show HomeScreen on page reload, go straight to dashboard
+      setShowHomeScreen(false);
     }
   }, []);
+
+  // Logout handler
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setShowHomeScreen(false);
+    setCurrentUserRole("");
+    setCurrentPage("dashboard");
+  };
 
   // ── role switching ────────────────────────────────────────────────────────
   // const handleRoleSwitch = (newRole: string) => {
@@ -230,14 +243,25 @@ export default function App() {
   // }
   if (!isLoggedIn) {
   return (
-    <Login
+    <LoginTest
       onLogin={(user: any) => {
         setCurrentUserRole(user.role);
         setIsLoggedIn(true);
+        setShowHomeScreen(true);
       }}
     />
   );
 }
+
+  // Show home screen after login
+  if (showHomeScreen) {
+    return (
+      <HomeScreen 
+        onLogout={handleLogout} 
+        onContinue={() => setShowHomeScreen(false)}
+      />
+    );
+  }
 
   return (
     <div className="flex h-screen bg-slate-50">
@@ -245,6 +269,7 @@ export default function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         currentUserRole={currentUserRole}
+        onLogout={handleLogout}
       />
       <main className="flex-1 overflow-y-auto p-8 flex flex-col">
         {/* {!isPublicPage && (

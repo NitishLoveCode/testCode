@@ -138,7 +138,7 @@
 
 
 
-import { LayoutDashboard, UserPlus, CheckSquare, Users as UsersIcon, Settings, Shield, Building2, XCircle } from "lucide-react";
+import { LayoutDashboard, UserPlus, CheckSquare, Users as UsersIcon, Settings, Shield, Building2, XCircle, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Page } from "@/App";
 
@@ -146,9 +146,10 @@ interface SidebarProps {
   currentPage: Page;
   setCurrentPage: (page: Page) => void;
   currentUserRole: string;
+  onLogout?: () => void;
 }
 
-export default function Sidebar({ currentPage, setCurrentPage, currentUserRole }: SidebarProps) {
+export default function Sidebar({ currentPage, setCurrentPage, currentUserRole, onLogout }: SidebarProps) {
   const navItems = [
     { id: "dashboard",    label: "Dashboard",        icon: LayoutDashboard, roles: ["Admin", "Approver", "Requestor"], public: false },
     { id: "new-customer", label: "New Customer",     icon: UserPlus,        roles: ["Admin", "Requestor"],             public: true  },
@@ -252,6 +253,17 @@ export default function Sidebar({ currentPage, setCurrentPage, currentUserRole }
           <Settings className="w-4 h-4" />
           Settings
         </button>
+
+        {/* Logout Button */}
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 text-red-500 hover:bg-red-50 hover:text-red-600"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
+        )}
 
         <div className="flex items-center gap-2.5 px-3 py-2.5 mt-1">
           <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">
