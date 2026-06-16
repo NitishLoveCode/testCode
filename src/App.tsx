@@ -241,6 +241,7 @@ export default function App() {
   //     </div>
   //   );
   // }
+  console.log("isLoggedIn:", isLoggedIn, "showHomeScreen:", showHomeScreen);
   if (!isLoggedIn) {
   return (
     <LoginTest
