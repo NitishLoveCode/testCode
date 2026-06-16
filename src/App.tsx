@@ -55,6 +55,9 @@ export default function App() {
   const [currentUserRole, setCurrentUserRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showHomeScreen, setShowHomeScreen] = useState(false);
+
+
+  console.log("isLoggedIn:", isLoggedIn, "showHomeScreen:", showHomeScreen);
   // const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
   // Modal state for role-switch login prompt
