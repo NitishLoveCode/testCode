@@ -246,6 +246,8 @@ export default function App() {
   // }
   console.log("isLoggedIn:", isLoggedIn, "showHomeScreen:", showHomeScreen);
   if (!isLoggedIn) {
+  console.log("Rendering LoginTest component");
+  alert(isLoggedIn)
   return (
     <LoginTest
       onLogin={(user: any) => {
