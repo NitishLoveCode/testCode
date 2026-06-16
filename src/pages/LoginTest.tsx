@@ -12,6 +12,13 @@ export default function LoginTest({ onLogin }: LoginTestProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+
+
+    console.log("LoginTest rendered. Accounts:", accounts);
+    console.log("lllllllllllllll")
+
+
+
   // Handle redirect response when user returns from Microsoft login
   useEffect(() => {
     const handleRedirectResponse = async () => {
